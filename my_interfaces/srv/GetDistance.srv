@@ -1,0 +1,4 @@
+##### resquest GetDistance####
+---
+####response GetDistance####
+float64 getdistance

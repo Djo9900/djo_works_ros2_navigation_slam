@@ -1,0 +1,21 @@
+<?xml  version ="1.0" ?>
+<robot  name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+     
+     <xacro:include filename="robot.xacro" /> 
+     
+     <!--Inclure le lidar -->
+     <xacro:include filename="lidar.xacro"/>  
+
+     <!--Control robot-->
+
+     <xacro:include filename = "controle_gazebo.xacro"/>
+          <!-- camera -->
+     <xacro:include filename='camera.xacro' />
+           <!-- Imu -->
+     <xacro:include filename='imu.xacro'/>
+
+     <!-- Navsat -->
+     <xacro:include filename="gps.xacro"/>
+
+
+</robot>
