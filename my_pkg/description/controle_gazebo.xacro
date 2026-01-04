@@ -34,7 +34,7 @@
 
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>
-            <publish_wheel_tf>false</publish_wheel_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
             
            <!-- Pour publier la pose et la vitesse de mon robot sur nav_msgs/odometiee -->
             <odom_topic>odom</odom_topic>

@@ -1,0 +1,52 @@
+ekf_node:
+    ros_parameters:
+        frequency: 30.0  # La fréquence, en Hz, à laquelle le filtre produira une estimation de position
+
+        two_d_mode: true ## a true car mon robot evolue sur un environnement planaire sinon mettre a False si on veut etre en 3D
+
+
+        ### publier l'accéleration  ##
+
+        publish_acceleration: true
+
+        #### diffuser les info de la transformation sur le topic /tf
+        publish_tf: true
+
+        #print_diagnostic: true ## utile pour effectuer le diagnostic et débuguer mes donné du capteur, car le message
+                               ### sera publier sur le topic /diagnostics
+
+
+
+        map_frame: map
+        odom_frame: odom
+        base_link_frame: base_footprint
+        world_frame: odom 
+
+
+        odom0: /odom
+        odom0_config: [true, true, false,     ##position X, Y
+                      false, false, true,     # orientation (yaw)
+                      true, true, false,      # vitesse linéaire
+                      false, false, true,     # vitesse angulaire
+                      false, false, false]    #accélération 
+
+
+        odom0_queue_size: 2 ### pour fussionner plus de donné 
+
+        imu0: /imu
+        imu0_config: [false, false, false,
+                      false, false, true,
+                      false, false, false,
+                      false, false, true,
+                      false, true, false]
+
+
+        #### Fusion avec le gps
+
+        # gps0: scan
+        # gps0_config:  
+
+
+            
+
+        

@@ -23,7 +23,7 @@
 
             <enable_metrics>true</enable_metrics>
 
-            <gz_frame_id>imu_link</gz_frame_id>
+            <frame_id>imu_link</frame_id>
         </sensor>
     </gazebo>
 </robot>

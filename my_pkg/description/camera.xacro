@@ -74,7 +74,7 @@
       <always_on>1</always_on>
       <update_rate>20</update_rate>
       <topic>camera/image</topic>
-      <gz_frame_id>camera_link</gz_frame_id>
+      <frame_id>camera_link</frame_id>
     </sensor>
   </gazebo>
 

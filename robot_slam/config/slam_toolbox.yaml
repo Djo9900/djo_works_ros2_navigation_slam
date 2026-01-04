@@ -10,8 +10,8 @@ slam_toolbox:
 
     odom_frame: odom
     map_frame: map
-    base_frame: base_footprint
-    scan_topic: /scan
+    base_frame: base_link
+    scan_topic: scan
 
     mode: localization  #mapping           # <-- doit être exactement à ce niveau
     use_sim_time: true
