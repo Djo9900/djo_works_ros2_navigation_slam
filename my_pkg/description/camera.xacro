@@ -1,81 +1,78 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <!-- Le lien de la caméra -->
-      <!-- STEP 7 - Camera -->
-  <joint type="fixed" name="camera_joint">
-    <origin xyz="0.315 0 0.075" rpy="0 0 0"/>
-    <child link="camera_link"/>
-    <parent link="chassis"/>
-    <axis xyz="0 1 0" />
-  </joint>
+    <joint name="camera_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="camera_link"/>
+        <origin xyz="0.142 0 0.161" rpy="0 0 0"/>
+    </joint>
 
-  <link name='camera_link'>
-    <pose>0 0 0 0 0 0</pose>
-    <inertial>
-      <mass value="0.1"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia
-          ixx="1e-6" ixy="0" ixz="0"
-          iyy="1e-6" iyz="0"
-          izz="1e-6"
-      />
-    </inertial>
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="0.010 0.03 0.03"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 -0.05"/>
+            <geometry>
+                <cylinder radius="0.002" length="0.1"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
 
-    <collision name='collision'>
-      <origin xyz="0 0 0" rpy="0 0 0"/> 
-      <geometry>
-        <box size=".03 .03 .03"/>
-      </geometry>
-    </collision>
 
-    <visual name='camera_link_visual'>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size=".03 .03 .03"/>
-      </geometry>
-    </visual>
+    <joint name="camera_optical_joint" type="fixed">
+        <parent link="camera_link"/>
+        <child link="camera_link_optical"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
 
-  </link>
+    <link name="camera_link_optical"></link>
 
-  <gazebo reference="camera_link">
-    <material>Gazebo/Red</material>
-  </gazebo>
 
-  <joint type="fixed" name="camera_optical_joint">
-    <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
-    <child link="camera_link_optical"/>
-    <parent link="camera_link"/>
-  </joint>
 
-  <link name="camera_link_optical">
-  </link>
+    <gazebo reference="camera_link">
+        <material>Gazebo/Black</material>
 
-    <!-- Plugin Gazebo pour simuler la caméra -->
-  <gazebo reference="camera_link">
-    <sensor name="wideangle_camera" type="wideanglecamera">
+        <sensor name="rgbd_camera" type="rgbd_camera">
+            <update_rate>20</update_rate>
+            <topic>/image/image_raw</topic>
+            <gz_frame_id>camera_link_optical</gz_frame_id>
+            
+            
+            <camera>
+                <horizontal_fov>1.089</horizontal_fov> 
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>RGB_INT8</format>
+                </image>
+                <clip>
+                    <near>0.05</near>
+                    <far>10.0</far>
+                </clip>
+                
+            </camera>
 
-      <camera>
-        <horizontal_fov>3.14</horizontal_fov>
-        <image>
-          <width>640</width>
-          <height>480</height>
-        </image>
-
-        <clip>
-          <near>0.1</near>
-          <far>15</far>
-        </clip>
-        
-        <optical_frame_id>camera_link_optical</optical_frame_id>
-        <camera_info_topic>camera/camera_info</camera_info_topic>
-      </camera>
-
-      <always_on>1</always_on>
-      <update_rate>20</update_rate>
-      <topic>camera/image</topic>
-      <frame_id>camera_link</frame_id>
-    </sensor>
-  </gazebo>
+            <depth_camera>
+                <clip>
+                    <near>0.05</near>
+                    <far>10.0</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.001</stddev>
+                </noise>
+            </depth_camera>
+            
+           
+            <always_on>1</always_on>
+            <visualize>true</visualize>
+        </sensor>
+    </gazebo>
 
 </robot>

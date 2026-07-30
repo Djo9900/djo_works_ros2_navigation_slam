@@ -1,0 +1,54 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Fréquence de calcul en Hz
+    use_sim_time: true
+
+    # Lecture de l'état réel des 4 roues
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Contrôleur de mouvement Skid-Steering / DiffDrive
+    diff_drive_base_controller:
+      type: diff_drive_controller/DiffDriveController
+
+diff_drive_base_controller:
+  ros__parameters:
+    use_sim_time: true
+
+    # Association exacte avec les joints de ton URDF
+    left_wheel_names: ['front_left_wheel_joint', 'rear_left_wheel_joint']
+    right_wheel_names: ['front_right_wheel_joint', 'rear_right_wheel_joint']
+
+    # Dimensions physiques tirées de tes variables Xacro
+    wheel_separation: 0.297
+    wheel_radius: 0.06
+
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    # Repères cinématiques
+    base_frame_id: base_footprint
+    odom_frame_id: odom
+
+    # Empêche les conflits TF si tu as déjà un OdometryPublisher
+    enable_odom_tf: false
+    use_stamped_vel: false
+
+    # Saturated Control (Limites d'accélération et de vitesse)
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 1.0
+        has_acceleration_limits: true
+        max_acceleration: 0.8
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 2.0
+        has_acceleration_limits: true
+        max_acceleration: 1.5
+
+joint_broad:
+  ros__parameters:
+    use_sim_time: true

@@ -1,0 +1,38 @@
+controller_manager:
+  ros__parameters:
+    # Fréquence de la boucle de contrôle (en Hz)
+    update_rate: 50
+
+    #On déclare notre contrôleur d'actionneurs
+    ackermann_controller:
+      type: ackermann_steering_controller/AckermannSteeringController
+
+    # On déclare le broadcaster pour lire l'état des joints
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster 
+
+
+
+  # --- Configuration spécifique de chaque contrôleur déclaré ci-dessus ---
+
+ackermann_controller:
+  ros__parameters:
+
+    # Noms des roues motrices (propulsion) - généralement à l'arrière
+    rear_wheels_names: ['rear_right_wheel_joint', 'rear_left_wheel_joint']
+    
+    # Noms des roues directrices (direction) - généralement à l'avant
+    front_wheels_names: ['front_right_steering_joint', 'front_left_steering_joint']
+
+    # Dimensions du robot
+    wheelbase: 3.24644
+    front_wheel_track: 1.76868
+    rear_wheel_track: 1.76868
+    front_wheels_radius: 0.45
+    rear_wheels_radius: 0.45
+
+    use_stamped_vel: false
+
+
+joint_broad:
+  ros__parameters: 
