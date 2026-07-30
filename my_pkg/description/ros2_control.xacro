@@ -14,6 +14,7 @@
         <param name="min">-10</param>
         <param name="max">10</param>
       </command_interface>
+      
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
@@ -54,8 +55,8 @@
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
         <robot_param>robot_description</robot_param>
         <robot_param_node>robot_state_publisher</robot_param_node>
-        <parameters>$(my_pkg)/configuration/differentiel_controller.yaml</parameters>
-        <parameters>$(my_pkg)/configuration/gaz_ros2_ctl_use_sim.yaml</parameters>
+        <parameters>$(find my_pkg)/configuration/differentiel_controller.yaml</parameters>
+        <parameters>$(find my_pkg)/configuration/gaz_ros2_ctl_use_sim.yaml</parameters>
     </plugin>
   </gazebo>
 

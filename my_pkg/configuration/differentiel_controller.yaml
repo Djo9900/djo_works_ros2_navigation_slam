@@ -1,5 +1,6 @@
 controller_manager:
   ros__parameters:
+
     update_rate: 50  # Fréquence de calcul en Hz
     use_sim_time: true
 
@@ -8,10 +9,10 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     # Contrôleur de mouvement Skid-Steering / DiffDrive
-    diff_drive_base_controller:
+    diff_drive_controller:
       type: diff_drive_controller/DiffDriveController
 
-diff_drive_base_controller:
+diff_drive_controller:
   ros__parameters:
     use_sim_time: true
 
@@ -30,24 +31,63 @@ diff_drive_base_controller:
     # Repères cinématiques
     base_frame_id: base_footprint
     odom_frame_id: odom
+    pose_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    twist_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
     # Empêche les conflits TF si tu as déjà un OdometryPublisher
-    enable_odom_tf: false
+    #enable_odom_tf: false
     use_stamped_vel: false
 
+
+    position_feedback: false
+    open_loop: true
+    enable_odom_tf: true
+
+    cmd_vel_timeout: 60.0 # seconds
+    publish_limited_velocity: true
+    #velocity_rolling_window_size: 10.0
+
     # Saturated Control (Limites d'accélération et de vitesse)
-    linear:
-      x:
-        has_velocity_limits: true
-        max_velocity: 1.0
-        has_acceleration_limits: true
-        max_acceleration: 0.8
-    angular:
-      z:
-        has_velocity_limits: true
-        max_velocity: 2.0
-        has_acceleration_limits: true
-        max_acceleration: 1.5
+
+    linear.x.has_velocity_limits: true
+    linear.x.max_velocity: 1.0
+    #linear.x.min_velocity: .NAN
+    linear.x.has_acceleration_limits: true
+    linear.x.max_acceleration: 0.8
+
+    # linear.x.max_deceleration: .NAN
+    # linear.x.max_acceleration_reverse: .NAN
+    # linear.x.max_deceleration_reverse: .NAN
+    # linear.x.max_jerk: .NAN
+    # linear.x.min_jerk: .NAN
+
+
+    angular.z.has_velocity_limits: true
+    angular.z.max_velocity: 2.0
+    #angular.z.min_velocity: .NAN
+
+    angular.z.has_acceleration_limits: true
+    angular.z.max_acceleration: 1.5
+
+    # angular.z.max_deceleration: .NAN
+    # angular.z.max_acceleration_reverse: .NAN
+    # angular.z.max_deceleration_reverse: .NAN
+    # angular.z.max_jerk: .NAN
+    # angular.z.min_jerk: .NAN
+
+
+    # linear:
+    #   x:
+    #     has_velocity_limits: true
+    #     max_velocity: 1.0
+    #     has_acceleration_limits: true
+    #     max_acceleration: 0.8
+    # angular:
+    #   z:
+    #     has_velocity_limits: true
+    #     max_velocity: 2.0
+    #     has_acceleration_limits: true
+    #     max_acceleration: 1.5
 
 joint_broad:
   ros__parameters:

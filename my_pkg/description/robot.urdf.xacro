@@ -11,12 +11,12 @@
 
      <xacro:include filename="odom.xacro" /> 
 
-      <xacro:include filename="ros2_control.xacro" /> 
+     <xacro:include filename="ros2_control.xacro" /> 
 
 
 
 
-    <xacro:include filename="controle_gazebo.xacro" />
+    <!--<xacro:include filename="controle_gazebo.xacro" /> -->
      <!-- Imu -->
      <xacro:include filename='imu.xacro'/>
 
