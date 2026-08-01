@@ -1,0 +1,80 @@
+ekf_node:
+    ros_parameters:
+        frequency: 30.0  # La fréquence, en Hz, à laquelle le filtre produira une estimation de position
+
+        two_d_mode: true ## a true car mon robot evolue sur un environnement planaire sinon mettre a False si on veut etre en 3D
+
+
+        ### publier l'accéleration  ##
+
+        publish_acceleration: true
+        print_diagnostics: true
+        debug: false
+        #### diffuser les info de la transformation sur le topic /tf
+        publish_tf: false
+
+        #print_diagnostic: true ## utile pour effectuer le diagnostic et débuguer mes donné du capteur, car le message
+                               ### sera publier sur le topic /diagnostics
+
+
+
+        map_frame: map
+        odom_frame: odom
+        base_link_frame: base_link
+        world_frame: odom 
+
+
+        odom0: odom
+        odom0_config: [false, false, false,     ##position X, Y
+                      false, false, true,     # orientation (yaw)
+                      true, true, true,      # vitesse linéaire
+                      false, false, true,     # vitesse angulaire
+                      false, false, false]    #accélération 
+
+
+        odom0_queue_size: 10 ### pour fussionner plus de donné 
+        odom0_differential: false
+        odom0_relative: false
+
+        imu0: imu/data
+        imu0_config: [false, false, false,
+                      false, false, true,
+                      false, false, false,
+                      false, false, false,
+                      false, false, false]
+
+        imu0_differential: false  # If using a real robot you might want to set this to true, since usually absolute measurements from real imu's are not very accurate
+        imu0_relative: false
+        imu0_queue_size: 10
+        imu0_remove_gravitational_acceleration: true
+
+
+        use_control: false
+
+        
+
+
+navsat_transform:
+  ros__parameters:
+    frequency: 30.0
+    delay: 3.0
+    magnetic_declination_radians: 0.0
+    yaw_offset: 0.0 #-1.52
+    zero_altitude: true
+    broadcast_cartesian_transform: true
+    publish_filtered_gps: true
+    use_odometry_yaw: true
+    wait_for_datum: true
+    #datum: [43.899967, 3.199972, 0.0]  # Latitude, Longitude, Altitude
+
+
+
+        #### Fusion avec le gps
+
+        # gps0: scan
+        # gps0_config:  
+
+
+            
+
+        
