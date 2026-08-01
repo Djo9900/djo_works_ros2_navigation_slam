@@ -21,6 +21,11 @@ def generate_launch_description():
         get_package_share_directory(package_name), "config", "nav2_params.yaml"
     )
     
+    
+    ## chemin ou se trouve la carte de navigation
+    static_map_path = os.path.join(get_package_share_directory(package_name), "config", "mon_monde.yaml"
+    )
+    
     bringup_dir = get_package_share_directory("nav2_bringup")
     localization_dir = get_package_share_directory("faucon_localisation")
 
@@ -97,6 +102,15 @@ def generate_launch_description():
                 default_value=nav2_params_path,
                 description="Full path to the ROS2 parameters file to use for all launched nodes",
             ),
+            
+            ## lancer la carte de mon monde que j'ai obtenu avec slam tool box
+            launch.actions.DeclareLaunchArgument(
+                
+                name="map",
+                default_value=static_map_path,
+                description =  "Full path to map file to load"
+            ),
+            
             launch.actions.DeclareLaunchArgument(
                 name="autostart",
                 default_value="true",

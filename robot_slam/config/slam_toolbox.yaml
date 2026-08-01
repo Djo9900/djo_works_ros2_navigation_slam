@@ -11,40 +11,40 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_link
-    scan_topic: scan
+    scan_topic: /scan
 
-    mode: localization  #mapping           # <-- doit être exactement à ce niveau
+    mode: mapping  #localization          # <-- doit être exactement à ce niveau
     use_sim_time: true
 
 
     # restamp_tf: false
     # scan_queue_size: 1.0
     # use_map_saver: true
-    map_file_name: /home/djo9800/djo_works/src/robot_slam/maps/my_map_serial
-    map_start_at_dock: true
+    #map_file_name: /home/djo9800/djo_works/src/robot_slam/maps/my_map_serial
+    #map_start_at_dock: true
 
 
     debug_logging: false
     throttle_scans: 1
     transform_publish_period: 0.02 #if 0 never publishes odometry
-    map_update_interval: 2.0
-    resolution: 0.04
+    map_update_interval: 5.0
+    resolution: 0.06
     restamp_tf: false
-    min_laser_range: 0.0 #for rastering images
-    max_laser_range: 14.0 #for rastering images
+    #min_laser_range: 0.0 #for rastering images
+    max_laser_range: 25.0 #for rastering images
     minimum_time_interval: 0.5
     transform_timeout: 0.2
     tf_buffer_duration: 20.0
     stack_size_to_use: 40000000 #// program needs a larger stack size to serialize large maps
-    enable_interactive_mode: false
+    enable_interactive_mode: true
 
       # General Parameters
     use_scan_matching: true
     use_scan_barycenter: true
-    minimum_travel_distance: 0.3
+    minimum_travel_distance: 0.5
     minimum_travel_heading: 0.5
     scan_buffer_size: 10
-    scan_buffer_maximum_scan_distance: 7.0
+    scan_buffer_maximum_scan_distance: 10.0
     link_match_minimum_response_fine: 0.1  
     link_scan_maximum_distance: 1.5
     loop_search_maximum_distance: 3.0
@@ -73,3 +73,7 @@ slam_toolbox:
     minimum_angle_penalty: 0.9
     minimum_distance_penalty: 0.5
     use_response_expansion: true
+
+## rajouter car vue dans robot indor mA64
+    # min_pass_through: 2
+    # occupancy_threshold: 0.1
